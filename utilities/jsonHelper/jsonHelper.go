@@ -23,7 +23,7 @@ func GetJsonStructureFromType(mapType reflect.Type) (string, error) {
 		}
 		jsonFormat += structure
 	default:
-		jsonFormat = fmt.Sprintf("%s", mapType)
+		jsonFormat = mapType.String()
 	}
 
 	return jsonFormat, nil
@@ -50,7 +50,7 @@ func GetJsonStructureFromSlice(t reflect.Type) (string, error) {
 		jsonFormat += structure
 		jsonFormat += "\n]"
 	} else {
-		jsonFormat += fmt.Sprintf("%s", t)
+		jsonFormat += t.String()
 	}
 
 	return jsonFormat, nil
@@ -58,7 +58,7 @@ func GetJsonStructureFromSlice(t reflect.Type) (string, error) {
 
 func GetJsonStructureFromStruct(t reflect.Type) (string, error) {
 	t = TransformFromPointer(t)
-	result := fmt.Sprintf("{\n")
+	result := "{\n"
 
 	for i := 0; i < t.NumField(); i++ {
 		f := t.Field(i)
