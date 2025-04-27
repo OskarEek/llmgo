@@ -18,7 +18,7 @@ func (cm *ClientManager) GenerateResponse(prompt string) (string, error) {
 		return "", err
 	}
 
-	text, err := cm.Client.GetTextFromResponse(resp)
+	text, err := cm.Client.GetAnswerFromResponse(resp)
 	if err != nil {
 		return "", err
 	}
@@ -47,7 +47,7 @@ func (cm *ClientManager) GenerateJsonResponse(prompt string, mapType reflect.Typ
 		return zero, err
 	}
 
-	text, err := cm.Client.GetTextFromResponse(resp)
+	text, err := cm.Client.GetAnswerFromResponse(resp)
 	if err != nil {
 		var zero []byte
 		return zero, err

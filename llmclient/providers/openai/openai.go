@@ -10,14 +10,14 @@ import (
 )
 
 type OpenAIClient struct {
-	APIKey   string
-	GptModel GptModel
+	APIKey string
+	Model  GptModel
 }
 
 func (oc *OpenAIClient) SendRequest(prompt string) ([]byte, error) {
 	url := "https://api.openai.com/v1/responses"
 	requestBody := map[string]interface{}{
-		"model": oc.GptModel,
+		"model": oc.Model,
 		"input": prompt,
 	}
 
@@ -53,7 +53,7 @@ func (oc *OpenAIClient) SendRequest(prompt string) ([]byte, error) {
 	return body, nil
 }
 
-func (oc *OpenAIClient) GetTextFromResponse(apiResponse []byte) (string, error) {
+func (oc *OpenAIClient) GetAnswerFromResponse(apiResponse []byte) (string, error) {
 	var response Response
 	err := json.Unmarshal(apiResponse, &response)
 	if err != nil {
