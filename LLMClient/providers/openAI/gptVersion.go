@@ -1,4 +1,4 @@
-package OpenAI
+package openai
 
 type GptModel string
 
@@ -15,6 +15,7 @@ const (
 	gpt_41_mini   GptModel = "gpt-4.1-mini"
 	gpt_4o_mini   GptModel = "gpt-4o-mini"
 	gpt_41_nano   GptModel = "gpt-4.1-nano"
+	gpt_35_turbo  GptModel = "gpt-3.5-turbo"
 )
 
 var GptModels = struct {
@@ -39,6 +40,7 @@ var GptModels = struct {
 	//Older GPT models
 
 	//GPT base models
+	Gpt_35_turbo GptModel
 }{
 	Gpt_o4_mini:   gpt_o4_mini,
 	Gpt_o3_mini:   gpt_o3_mini,
@@ -52,4 +54,5 @@ var GptModels = struct {
 	Gpt_41_mini:   gpt_41_mini,
 	Gpt_4o_mini:   gpt_4o_mini,
 	Gpt_41_nano:   gpt_41_nano,
+	Gpt_35_turbo:  gpt_35_turbo,
 }

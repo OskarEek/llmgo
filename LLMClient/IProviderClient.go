@@ -1,5 +1,6 @@
 package llmclient
 
 type IProviderClient interface {
-	GenerateResponse(prompt string) ([]byte, error)
+	SendRequest(prompt string) ([]byte, error)
+	GetTextFromResponse(apiResponse []byte) (string, error)
 }

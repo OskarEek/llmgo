@@ -1,5 +1,5 @@
-module github.com/OskarEek/llmgo
+module github.com/oskareek/llmgo
 
 go 1.24.2
 
-replace github.com/OskarEek/llmgo => ../llmgo
+replace github.com/oskareek/llmgo => ../llmgo

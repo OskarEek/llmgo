@@ -1,11 +1,8 @@
-package main
+package jsonhelper
 
 import (
-	"fmt"
 	"reflect"
 	"testing"
-
-	jsonHelper "github.com/OskarEek/llmgo/utilities/jsonHelper"
 )
 
 type ParentTest struct {
@@ -27,7 +24,7 @@ type FaultyStruct struct {
 
 func TestFaultyStruct(t *testing.T) {
 	var obj FaultyStruct
-	structure, err := jsonHelper.GetJsonStructureFromType(reflect.TypeOf(obj))
+	structure, err := GetJsonStructureFromType(reflect.TypeOf(obj))
 	if err != nil {
 		t.Logf("%s", err)
 	} else {
@@ -38,7 +35,7 @@ func TestFaultyStruct(t *testing.T) {
 
 func TestStructJson(t *testing.T) {
 	var obj PersonTest
-	structure, err := jsonHelper.GetJsonStructureFromType(reflect.TypeOf(obj))
+	structure, err := GetJsonStructureFromType(reflect.TypeOf(obj))
 	if err != nil {
 		t.Logf("%s", err)
 		t.FailNow()
@@ -48,9 +45,9 @@ func TestStructJson(t *testing.T) {
 
 func TestStructSliceJson(t *testing.T) {
 	var obj []PersonTest
-	structure, err := jsonHelper.GetJsonStructureFromType(reflect.TypeOf(obj))
+	structure, err := GetJsonStructureFromType(reflect.TypeOf(obj))
 	if err != nil {
-		fmt.Printf("%s", err)
+		t.Logf("%s", err)
 		t.FailNow()
 	}
 	t.Logf("\n%s", structure)
@@ -58,9 +55,9 @@ func TestStructSliceJson(t *testing.T) {
 
 func TestSliceJson(t *testing.T) {
 	var obj []int
-	structure, err := jsonHelper.GetJsonStructureFromType(reflect.TypeOf(obj))
+	structure, err := GetJsonStructureFromType(reflect.TypeOf(obj))
 	if err != nil {
-		fmt.Printf("%s", err)
+		t.Logf("%s", err)
 		t.FailNow()
 	}
 	t.Logf("\n%s", structure)

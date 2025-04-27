@@ -1,10 +1,11 @@
 package manager
 
 import (
+	"fmt"
 	"reflect"
 
-	llm "github.com/OskarEek/llmgo/LLMClient"
-	jsonHelper "github.com/OskarEek/llmgo/utilities/jsonHelper"
+	llm "github.com/oskareek/llmgo/llmclient"
+	jsonHelper "github.com/oskareek/llmgo/utilities/jsonhelper"
 )
 
 type ClientManager struct {
@@ -12,11 +13,17 @@ type ClientManager struct {
 }
 
 func (cm *ClientManager) GenerateResponse(prompt string) (string, error) {
-	resp, err := cm.Client.GenerateResponse(prompt)
+	resp, err := cm.Client.SendRequest(prompt)
 	if err != nil {
 		return "", err
 	}
-	return string(resp), nil
+
+	text, err := cm.Client.GetTextFromResponse(resp)
+	if err != nil {
+		return "", err
+	}
+
+	return string(text), nil
 }
 
 func (cm *ClientManager) GenerateJsonResponse(prompt string, mapType reflect.Type) ([]byte, error) {
@@ -33,11 +40,18 @@ func (cm *ClientManager) GenerateJsonResponse(prompt string, mapType reflect.Typ
 			"\nDo not add any additional words. Highest priority is to be able to map your response directly to the provided structure"
 	prompt += jsonPrompt
 
-	result, err := cm.Client.GenerateResponse(prompt)
+	resp, err := cm.Client.SendRequest(prompt)
+	fmt.Print("\n" + string(resp) + "\n")
 	if err != nil {
 		var zero []byte
 		return zero, err
 	}
 
-	return result, nil
+	text, err := cm.Client.GetTextFromResponse(resp)
+	if err != nil {
+		var zero []byte
+		return zero, err
+	}
+
+	return []byte(text), nil
 }
